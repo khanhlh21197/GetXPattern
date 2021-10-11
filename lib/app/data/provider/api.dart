@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:getx_pattern/app/data/model/LoginPostResponse.dart';
 import 'package:getx_pattern/app/data/model/album.dart';
 import 'package:getx_pattern/app/data/model/menu.dart';
 import 'package:getx_pattern/app/data/model/model.dart';
@@ -8,6 +9,7 @@ import 'package:meta/meta.dart';
 
 const baseUrl = 'https://jsonplaceholder.typicode.com/posts/';
 const cinemaApi = "https://mycinema.asia/service/api/data";
+const smartHomeApi = 'http://103.146.23.146:8082/api/';
 
 class MyApiClient {
   final http.Client httpClient;
@@ -75,5 +77,25 @@ class MyApiClient {
         // Only accept JSON response
         headers: {"Accept": "application/json"});
     return response.body;
+  }
+
+  Future<String> login(
+      String phoneNumber, String password, bool isRemember) async {
+    var uriResponse = await httpClient.post(
+      Uri.parse('http://103.146.23.146:8082/api/Accounts/login'),
+      headers: <String, String>{
+        'content-type': 'application/json; charset=utf-8'
+      },
+      body: loginPostResponseToJson(LoginPostResponse(
+          phoneNumber: phoneNumber,
+          password: password,
+          isRemember: isRemember)),
+    );
+
+    print(
+        '${loginPostResponseToJson(LoginPostResponse(phoneNumber: phoneNumber, password: password, isRemember: isRemember))}');
+    print('${uriResponse.body}');
+
+    return uriResponse.body;
   }
 }

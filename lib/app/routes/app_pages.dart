@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:getx_pattern/app/bindings/details_binding.dart';
 import 'package:getx_pattern/app/bindings/home_binding.dart';
+import 'package:getx_pattern/app/bindings/login_binding.dart';
 import 'package:getx_pattern/app/ui/android/details/details_page.dart';
 import 'package:getx_pattern/app/ui/android/home/home_page.dart';
+import 'package:getx_pattern/app/ui/android/login/login_page.dart';
 
 part './app_routes.dart';
 
@@ -17,6 +19,11 @@ class AppPages {
       name: Routes.DETAILS,
       page: () => DetailsPage(),
       binding: DetailsBinding(),
+    ),
+    GetPage(
+      name: Routes.LOGIN,
+      page: () => LoginPage(),
+      binding: LoginBinding(),
     ),
   ];
 }

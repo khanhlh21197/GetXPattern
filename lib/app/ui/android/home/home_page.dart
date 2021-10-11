@@ -11,7 +11,6 @@ class HomePage extends GetView<HomeController> {
         child: GetX<HomeController>(initState: (state) {
           Get.find<HomeController>().getAll();
           Get.find<HomeController>().getAlbum();
-          Get.find<HomeController>().getMenu();
         }, builder: (_) {
           return _.postList.length < 1
               ? LoadingWidget()
@@ -19,11 +18,8 @@ class HomePage extends GetView<HomeController> {
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(_.postList[index].title +
-                              '---' +
-                              '${_.album.userId}' +
-                              '---' +
-                              '${_.menuList[index].name ?? ''}' ??
-                          'a'),
+                          '---' +
+                          '${_.album.userId}'),
                       subtitle: Text(_.postList[index].body ?? 'b'),
                       onTap: () => _.details(_.postList[index]),
                     );
